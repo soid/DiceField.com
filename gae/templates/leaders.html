@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>{% load i18n %}
+    <head>
+        <title>Лидеры - ВКубики.ру</title>
+        <link href="/css/pages.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="/js/lang.{{lang}}.js"></script>
+    </head>
+    <body style="text-align: center;">
+        <font style="font-family: cursive;font-size:38px;">{% trans "Лидеры за " %}{{cur_season|capfirst}}</font>
+        <br/>
+        <div style="text-align: left; width: 600px;display: inline-block; vertical-align: middle;">
+            <a href="{{prev_season_link}}"><img src="/images/arrow_left.png" height="16" width="16" border="0"/></a> <a href="{{prev_season_link}}">{% trans "Лидеры за " %}{{prev_season|capfirst}}</a>
+        </div>
+        <br/>
+        <div style="width: 300px;display: inline-block; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25 за сезон" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for u in top %}
+                <div>
+                    <div style="display: inline"><a href="{{u.getIntLink}}"><img width="50" src="{{u.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;">
+                        <script>
+                            document.write(lang.romanize("{{u.nickFull}}"));
+                        </script><br/>{{u.score}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div style="margin-left: 4px; width: 300px;display: inline-block; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25 сегодня" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for u in top_today %}
+                <div>
+                    <div style="display: inline"><a href="{{u.getIntLink}}"><img width="50" src="{{u.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;"><script>
+                            document.write(lang.romanize("{{u.nickFull}}"));
+                    </script><br/>{{u.stat_score_today|score}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <br/>
+        <div style="width: 300px;display: inline-block; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25 за очков за игру" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for u in top_ppg %}
+                <div>
+                    <div style="display: inline"><a href="{{u.getIntLink}}"><img width="50" src="{{u.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;">
+                        <script>
+                            document.write(lang.romanize("{{u.nickFull}}"));
+                        </script><br/>{{u.ppg|floatformat:2}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div style="width: 300px;display: inline-block; margin-left: 4px; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25 за все время" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for u in top_total %}
+                <div>
+                    <div style="display: inline"><a href="{{u.getIntLink}}"><img width="50" src="{{u.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;">
+                        <script>
+                            document.write(lang.romanize("{{u.nickFull}}"));
+                        </script><br/>{{u.score_total}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "analytics.html" %}
+    </body>
+</html>

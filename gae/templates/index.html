@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>{% load i18n %}
+    <head>
+        <title>{% if replay %}{% trans "Повтор - " %}{% endif %}{% trans "Войны Кубиков - ВКубики.Ру" %}</title>
+        <link href="/css/game.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/game.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/js/swfobject/swfobject.js"></script>
+        <script type="text/javascript" src="/js/lang.{{lang}}.js"></script>
+        {% ifequal auth_type "vk" %}
+        <link href="/css/index.vk.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="http://vkontakte.ru/js/api/xd_connection.js?20" type="text/javascript"></script>
+        <script src="/js/userlib.vk.js" type="text/javascript"></script>
+        {%endifequal%}
+        {% ifequal auth_type "mm" %}
+        <script type="text/javascript" src="http://connect.mail.ru/js/loader.js"></script>
+        <script src="/js/userlib.mm.js" type="text/javascript"></script>
+        <script>
+            MM_APP_ID = '{{ mm_app_id }}';
+            MM_PRIVATE_KEY = '{{ mm_private_key }}';
+        </script>
+        <style>
+            a.lnk {
+                color: #0857A6;
+                text-decoration: underline;
+                font: 12px Arial;
+            }
+            a.lnk:hover {
+                color: #F26D00;
+                text-decoration: none;
+                font: 12px Arial;
+            }
+        </style>
+        {%endifequal%}
+        {% ifequal auth_type "fb" %}
+        <link href="/css/index.fb.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="https://connect.facebook.net/en_US/all.js" type="text/javascript"></script>
+        <script src="/js/userlib.fb.js" type="text/javascript"></script>
+        <script>
+            game.fbToken = '{{access_token}}';
+            game.fbAppId = '{{ fb_app_id }}';
+        </script>
+        {%endifequal%}
+
+        {% ifequal auth_type "odnk" %}
+        <link href="/css/index.odnk.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="/js/userlib.odnk.js" type="text/javascript"></script>
+        <script src="{{odnk_api_server}}js/fapi.js" type="text/javascript"></script>
+        <script>
+            game.odnkApiServer = '{{odnk_api_server}}';
+            game.odnkApiConnection = '{{odnk_apiconnection}}';
+            game.odnkUserId = '';
+        </script>
+        {%endifequal%}
+
+        {% ifequal auth_type "guest" %}
+        <link href="/css/pages.css" rel="stylesheet" type="text/css" media="all" />
+        {%endifequal%}
+
+        <script>
+        function consoleLog(str) {
+            console.log(str);
+        }
+        $(document).ready(function () {
+            lang.cur = '{{ lang }}';
+            {% if replay %}
+            game.replay = true;
+            {% else %}
+            game.yourKey = '{{your_key}}';
+            game.accessFriends = {%if access_friends%}true{%else%}false{%endif%};
+            game.GSERVER = 'http://{{gserver}}';
+            game.authType = '{{ auth_type}}';
+            {% endif %}
+            $("#tabs").tabs();
+            game.init();
+
+            $("#id_openlink").load(game.openLinkReady);
+        });
+        </script>
+        
+    </head>
+    <body>
+    <a name="game"></a>
+    <div id="fb-root"></div>
+    <center>
+    {% if replay %}
+    <div>{% trans "Повтор игры от" %} {{replay.created|date:"DATE_FORMAT"}}</div>
+    {% else %}
+    <div id="sysmsg" style="margin:4px; width:726px;height:20px;vertical-align: middle;
+        border-radius: 10px; -moz-border-radius: 10px;
+		background-color: #ffc;border: 1px solid #c93; text-align:center;"><div id="sysmsgtext"></div></div>
+    {% endif %}
+
+    <table id="secondRow">
+        <tr style="height: 42px;font-family: tahoma, verdana, arial, sans-serif, 'Lucida Sans';font-size:smaller;">
+            <td style="width: 192px;vertical-align: top;" id="slot4"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot5"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot6"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot7"></td>
+        </tr>
+    </table>
+
+    <div id="map_canvas" style="z-index:1;width:750px;height:450px;">
+        <a href="http://www.adobe.com/go/getflashplayer">
+            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+        </a>
+    </div>
+    <script>
+        // "http://{{ server }}/game.swf"
+        swfobject.embedSWF("/swf/game.swf",
+            "map_canvas", "750px", "450px", "10.1.0",
+            "/js/swfobject/expressInstall.swf",
+            {
+                'language': '{{ lang }}',
+                {% if replay %}
+                'transport': 'replay',
+                'replay': '{{record|safe}}',
+                {% else %}
+                'session': '{{ session }}',
+                'yourKey': '{{ your_key }}',
+                {% if run_tutorial %}
+                'tutorial': true,
+                {% endif %}
+                {% endif %}
+                'server': '{{ server }}',
+                'port': 14067,
+                'gserver': '{{ gserver }}',
+                's_soundOn': {{ settings.soundOn|jsonify }},
+                's_soundLevel': {{ settings.soundLevel|jsonify }},
+                's_soundStart': {{ settings.soundStart|jsonify }},
+                's_soundYourTurn': {{ settings.soundYourTurn|jsonify }},
+                's_soundAttack': {{ settings.soundAttack|jsonify }},
+                's_soundComing': {{ settings.soundComing|jsonify }},
+                'sSound': '{{ sSound }}',
+                'sensor': false,
+                'key': '{{key}}'
+            },
+            {
+                'wmode': 'transparent',
+                'swliveconnect': 'true'
+            });
+    </script>
+
+    <table>
+        <tr style="height: 42px;font-family: tahoma, verdana, arial, sans-serif, 'Lucida Sans';font-size:smaller;">
+            <td style="width: 192px;vertical-align: top;" id="slot0"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot1"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot2"></td>
+            <td style="width: 192px;vertical-align: top;" id="slot3"></td>
+        </tr>
+    </table>
+    <table border="0" id="chattable">
+        <tr style="height: 150px">
+            <td style="width: 235px; vertical-align: top;">
+                <div id="tabs" class="players">
+                    <ul>
+                        <li><a href="#tabturns"><span>{% trans "Ходы" %}</span></a></li>
+                        {% if replay %}
+                        {% else %}
+                        {% if access_friends %}<li><a href="#tabfriends"><span>{% trans "Друзья" %}</span></a></li>{% endif %}
+                        <li><a href="#top"><span>{% trans "Топ" %}</span></a></li>
+                        {% endif %}
+                    </ul>
+                    <div id="tabturns" style="height:100px;overflow: auto;text-align:left;"></div>
+                    {% if replay %}
+                    {% else %}
+                    {% if access_friends %}<div id="tabfriends" style="height:100px;overflow: auto;"></div>{% endif %}
+                    <div id="top" style="height:100px;overflow: auto;"></div>
+                    {% endif %}
+                </div>
+            </td>
+            <td style="vertical-align: top;">
+                <table border="0">
+                    <tr>
+                        <td>
+                            <nobr>
+                            <form onSubmit="game.chat.sendInput(); return false;" style="margin-bottom: 0em;">
+                                <input type="text" id="chat_cl" {% if replay %}disabled="true" {% endif %}class="chat_cl" autocomplete="off" />
+                                <input type="image" src="/images/comment_add.png" height="16" width="16" alt="{% trans "Отправить" %}" title="{% trans "Отправить" %}"/>
+                            </form>
+                            </nobr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div id="chat" class="chat"></div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <div id="gamehelpid">
+        {% ifequal auth_type "vk" %}
+        <div class="lnk"><ul class="lnk">
+            <li class="lnk"><a href="http://vkontakte.ru/club20502965" class="lnk" target="_blank">Наша Группа</a></li>
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="return game.openLink('/leaders.html');">{% trans "Лидеры" %}</a></li>
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="game.userlib.invite(); return false;">{% trans "Пригласить друзей" %}</a></li>
+            <li class="lnk"><a href="/help.html" class="lnk" onclick="return game.openLink('/help.html?type=mm');">{% trans "Помощь" %}</a></li>
+            <li class="lnk" style="padding-left: 4px; padding-top: 4px;"><div id="vk_like" align="center" style="display: inline"></div></li>
+        </ul></div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    VK.Widgets.Like("vk_like", {
+                        type: "button",
+                        verb: 1,
+                        pageUrl: 'http://vkontakte.ru/app1955838',
+                        pageTitle: 'Кубики (логическая игра с реальными игроками)',
+                        pageDescription: 'Онлайн стратегия с реальными игроками.'
+                    });
+                });
+            </script>
+        {% endifequal %}
+        {% ifequal auth_type "mm" %}
+            <a href="http://my.mail.ru/community/vkubiki_club/" class="lnk" target="_blank"><img width="16" height="16" src="/images/mm_club.png">Наше сообщество</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/leaders.html" class="lnk" onclick="return game.openLink('/leaders.html');">Лидеры</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/leaders.html" class="lnk" onclick="game.userlib.invite(); return false;">Пригласить друзей</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="/help.html" class="lnk" onclick="return game.openLink('/help.html?type=mm');">Помощь</a>
+        {% endifequal %}
+        {% ifequal auth_type "fb" %}
+        <div class="lnk"><ul class="lnk">
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="return game.openLink('/leaders.html');">{% trans "Лидеры" %}</a></li>
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="game.userlib.invite(); return false;">{% trans "Пригласить друзей" %}</a></li>
+            <li class="lnk"><a href="/help.html" class="lnk" onclick="return game.openLink('/help.html?type=mm');">{% trans "Помощь" %}</a></li>
+        </ul></div>
+        {% endifequal %}
+        {% ifequal auth_type "odnk" %}
+        <div class="lnk"><ul class="lnk">
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="return game.openLink('/leaders.html');">{% trans "Лидеры" %}</a></li>
+            <li class="lnk"><a href="/leaders.html" class="lnk" onclick="game.userlib.invite(); return false;">{% trans "Пригласить друзей" %}</a></li>
+            <li class="lnk"><a href="/help.html" class="lnk" onclick="return game.openLink('/help.html?type=mm');">{% trans "Помощь" %}</a></li>
+        </ul></div>
+        {% endifequal %}
+        {% ifequal auth_type "guest" %}
+        <div style="text-align: right; margin-right: 40px;">
+            <a href="/leaders.html" target="_blank">{% trans "Лидеры"%}</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="/help.html" target="_blank">{% trans "Помощь" %}</a>
+        </div>
+        {% endifequal %}
+
+    </div>
+
+        {% if not replay and not hide_bottom %}
+        <iframe name="openlink" id="id_openlink" src="/help.html?type=mm" width="760" height="600" scrolling="vertical" frameborder="0">
+        </iframe>
+        {% if auth_type == "fb" or auth_type == "vk" or auth_type == "odnk" %}
+        <div class="lnk">
+            <ul class="lnk">
+                <li class="lnk" style="float: right;"><a class="lnk" href="#" onClick="game.userlib.scroll('top'); return false">&uarr; {% trans "Назад" %}</a>
+                </li>
+            </ul>
+        </div>
+        {% else %}
+        <a href="#" onClick="game.userlib.scroll('top'); return false">&uarr; {% trans "Назад" %}</a>
+        {% endif %}
+        {% endif %}
+    </center>
+        
+    {% include "analytics.html" %}
+    </body>
+</html>

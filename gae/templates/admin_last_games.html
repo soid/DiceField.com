@@ -1,0 +1,17 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+Playing log 
+{% if user %}
+for user <a href="{{user.getIntLink}}">{{user.nickname}}</a>
+{% endif %}
+<br/><br/>
+<a href="?action=last_games">All</a> | <a href="?action=last_games&only=abuse&user_id={{user.key.id}}">Only Abuse</a>
+<table>
+    <tr><td width="200">Date</td><td>Map</td><td>Players</td><td>Abuse</td><td>Open Chat</td></tr>
+    {% for g in games %}
+    <tr><td>{{g.created|date:"Y-m-d H:i"}}</td><td>{{g.map}}</td><td>{{g.players}}</td><td>{{g.abuse}}</td>
+        <td><a href="/replay/{{g.key.id}}?chat_only">chat &gt;&gt;&gt;</a></td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

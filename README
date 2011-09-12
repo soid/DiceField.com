@@ -1,0 +1,14 @@
+This project contains back-end part of online game dicefield.com.
+
+The code intended to be run on Google App Engine Cloud Service and these tasks were implemented:
+* Authorization in different social networks (facebook.com, vkontakte.ru, mail.ru, odnoklassniki.ru) and in google chrome web store;
+* Storage model of user profiles, thier performance, replays of thier games;
+* User performance calculations in backgound;
+* Web pages containing user profiles, starting page, leaders board;
+* Front-end part of the game in JavaScript also presented here.
+
+Other parts not included:
+* Long-running game server that communicates with App Engine Service;
+* Front-end Flex ActionScript3 game client that communicates with long-running server;
+
+This code is presented "as-is" for informational purposes.

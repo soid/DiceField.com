@@ -1,0 +1,49 @@
+{% load i18n %}
+<table align="center" border="1" style="border-spacing: 0px;border-collapse:collapse;">
+            <tr>
+                <td></td>
+                <td class="head">{% trans "Место" %}</td>
+                <td class="head">{% trans "1<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "2<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "3<sup>-е</sup>" %}</td>
+                <td class="head">{% trans "4<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "5<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "6<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "7<sup>-ое</sup>" %}</td>
+                <td class="head">{% trans "8<sup>-ое</sup>" %}</td>
+            </tr>
+            <tr>
+                <td class="head">{% trans "Размер карты" %}</td>
+                <td colspan="9"> </td>
+            </tr>
+            <tr>
+                <td class="head">{% trans "4 человека" %}</td>
+                <td rowspan="3"></td>
+                <td>{{places.4.0}}%</td>
+                <td>{{places.4.1}}%</td>
+                <td>{{places.4.2}}%</td>
+                <td>{{places.4.3}}%</td>
+                <td colspan="4"> </td>
+            </tr>
+            <tr>
+                <td class="head">{% trans "6 человек" %}</td>
+                <td>{{places.6.0}}%</td>
+                <td>{{places.6.1}}%</td>
+                <td>{{places.6.2}}%</td>
+                <td>{{places.6.3}}%</td>
+                <td>{{places.6.4}}%</td>
+                <td>{{places.6.5}}%</td>
+                <td colspan="2"> </td>
+            </tr>
+            <tr>
+                <td class="head">{% trans "8 человек" %}</td>
+                <td>{{places.8.0}}%</td>
+                <td>{{places.8.1}}%</td>
+                <td>{{places.8.2}}%</td>
+                <td>{{places.8.3}}%</td>
+                <td>{{places.8.4}}%</td>
+                <td>{{places.8.5}}%</td>
+                <td>{{places.8.6}}%</td>
+                <td>{{places.8.7}}%</td>
+            </tr>
+        </table>

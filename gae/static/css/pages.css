@@ -1,0 +1,40 @@
+div.section {
+	background: #DAE2E8;
+	color: #45688E;
+	font-weight: bold;
+	margin-top: 15px;
+	padding-left: 5px;
+    border-bottom: 1px solid;
+    width: 600px;
+    display: inline-block;
+}
+div.section2 {
+	background: #DAE2E8;
+	color: #45688E;
+	font-weight: bold;
+	margin-top: 15px;
+	padding-left: 5px;
+    border-bottom: 1px solid;
+    width: 300px;
+    display: inline-block;
+}
+div.section_red {
+	background: #DAE2E8;
+	color: red;
+	font-weight: bold;
+	margin-top: 15px;
+	padding-left: 5px;
+    border-bottom: 1px solid;
+    width: 600px;
+    display: inline-block;
+}
+a:hover {
+    text-decoration: underline;
+}
+a {
+	color: #45688E;
+    text-decoration: none;
+}
+td.head {
+    color:#45688E;
+}

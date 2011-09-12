@@ -1,0 +1,39 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<script>
+    function showPeriodSelect(id) {
+        var tmp = '<select onChange="document.getElementById(\'' + id + '\').value=this.value;">'
+            + '<option value="60">1 hour</option>'
+            + '<option value="180">3 hours</option>'
+            + '<option value="360">6 hours</option>'
+            + '<option value="720">12 hours</option>'
+            + '<option value="1440">1 day</option>'
+            + '<option value="2880">2 days</option>'
+            + '<option value="4320">3 days</option>'
+            + '<option value="7200">5 days</option>'
+            + '<option value="10080">7 days</option>'
+            + '<option value="20160">14 days</option>'            
+            + '<option value="43200">30 days</option>'
+            + '</select>'
+        document.write(tmp);
+    }
+</script>
+
+        <h3>Search Users</h3>
+        <div>
+            <form method="GET" action="/admin.html">
+                Vk id: <input type="text" name="search_vk_id" value="{{search_vk_id|escape}}" /><br/>
+                <input type="submit" name="search_user" value="Search"/>
+            </form>
+        </div>
+        {% if users_found %}
+        Users Found:<br/>
+        <table border="1">
+            <tr><td>Open</td><td>Id</td><td>Key</td><td>Nick</td></tr>
+        {% for u in users_found %}
+        <tr><td><a href="{{u.getIntLink}}">Open</a></td><td>{{u.key.id}}</td><td>{{u.key}}</td><td>{{u.nick}}</td></tr>
+        {% endfor %}
+        </table>
+        {% endif %}
+        </div>
+{% endblock %}

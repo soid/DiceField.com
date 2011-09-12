@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Map Editor :: VKubiki.RU</title>
+        <script type="text/javascript" src="/js/swfobject/swfobject.js"></script>
+    <style>
+        /* hide from ie5 mac \*/
+        html {
+          height: 100%;
+          overflow: hidden;
+        }
+        #flashcontent {
+          height: 100%;
+        }
+        /* end hide */
+        body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          background-color: #eee;
+        }
+    </style>
+    </head>
+    <body>
+
+    <div id="flashcontent">
+      <p>Install flash player</p>
+    </div>
+
+    <script>
+        swfobject.embedSWF("/swf/mapeditor.swf",
+            "flashcontent", "100%", "100%", "10.0.0",
+            "/js/swfobject/expressInstall.swf", {'key': '{{key}}', 'sensor': false});
+        function consoleLog(txt) {
+            console.log(txt);
+        }
+    </script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3555012-5']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    </body>
+</html>

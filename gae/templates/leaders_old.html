@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>{% load i18n %}
+    <head>
+        <title>Лидеры за {{ season_name }} - ВКубики.ру</title>
+        <link href="/css/pages.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="/js/lang.{{lang}}.js"></script>
+    </head>
+    <body style="text-align: center;">
+        <font style="font-family: cursive;font-size:38px;">{% trans "Лидеры за " %}{{season_name|capfirst}}</font>
+        <br/>
+        <div style="width: 600px;display: inline-block;">
+            {%if prev_season %}
+            <div style="float: left">
+                <a href="{{prev_season_link}}"><img src="/images/arrow_left.png" height="16" width="16" border="0"/></a> <a href="{{prev_season_link}}">{% trans "Лидеры за " %}{{prev_season|capfirst}}</a>
+            </div>
+            {% endif %}
+            <div style="float: right">
+                <a href="{{next_season_link}}">{% trans "Лидеры за " %}{{next_season|capfirst}}</a> <a href="{{next_season_link}}"><img src="/images/arrow_right.png" height="16" width="16" border="0"/></a>
+            </div>
+        </div>
+        <br/>
+        <div style="width: 300px;display: inline-block; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for s in top %}
+                <div>
+                    <div style="display: inline"><a href="{{s.user.getIntLink}}"><img width="50" src="{{s.user.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;">
+                        <script>
+                            document.write(lang.romanize("{{s.user.nickFull}}"));
+                        </script><br/>{{s.score}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div style="margin-left: 4px; width: 300px;display: inline-block; vertical-align: top;">
+            <div class="section2">{% trans "Топ 25 очков за игру" %}</div>
+            <br/>
+            <div style="text-align: left;">
+                {% for s in top_ppg %}
+                <div>
+                    <div style="display: inline"><a href="{{s.user.getIntLink}}"><img width="50" src="{{s.user.photo}}" border="0"/></a></div>
+                    <div style="display: inline-block; margin: 2px;vertical-align: top;">
+                        <script>
+                            document.write(lang.romanize("{{s.user.nickFull}}"));
+                        </script><br/>{{s.stat_ppg|floatformat:2}}</div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>

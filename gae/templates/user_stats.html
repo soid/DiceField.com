@@ -1,0 +1,33 @@
+{% for s in games %}{% load i18n %}
+    {%ifequal s.map "Penalty"%}
+        <tr>
+            <td>{{s.created|date:"DATE_FORMAT"}}</td>
+            {% if s.score < 0 %}
+            <td colspan="3"><font color="red"><b>{% trans "Штраф" %}</b></font></td>
+            {% else %}
+            <td colspan="3"><font color="green"><b>{% trans "Отмена штрафа" %}</b></font></td>
+            {% endif %}
+            <td>{{s.score|score}}</td>
+            <td>{{s.total_score}}</td>
+            <td></td>
+        </tr>
+    {%else%}{%ifequal s.map "Bonus"%}
+        <tr>
+            <td>{{s.created|date:"DATE_FORMAT"}}</td>
+            <td colspan="3"><font color="green"><b>{% trans "Бонус" %}</b></font></td>
+            <td>{{s.score|score}}</td>
+            <td>{{s.total_score}}</td>
+            <td></td>
+        </tr>
+    {% else %}
+        <tr>
+            <td>{{s.created|date:"DATE_FORMAT"}}</td>
+            <td>{{s.map}}</td>
+            <td>{{s.turn}}</td>
+            <td>{{s.place}}</td>
+            <td>{{s.score|score}}</td>
+            <td>{{s.total_score}}</td>
+            <td>{% if s.rgame %}<a target="_blank" href="/replay/{{s.rgame.key.id}}">{% trans "Смотреть" %}</a>{% else %}-{% endif %}</td>
+        </tr>
+    {%endifequal%}{%endifequal%}
+{% endfor %}

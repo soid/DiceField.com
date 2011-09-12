@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>VKubiki Control Panel</title>
+        <script>
+            switchUsers = function () {
+                var u1 = document.getElementById('u1');
+                var u2 = document.getElementById('u2');
+                var tmp = u1.value;
+                u1.value = u2.value;
+                u2.value = tmp;
+            }
+        </script>
+    </head>
+    <body>
+        <div>Menu |
+            <a href="?action=admin_log">Search</a> |
+            <a href="?action=log">Log</a> |
+            <a href="?action=last_games">Last games</a> |
+            <a href="http://aurora.vkubiki.ru/stats/">Analysis</a> |
+            <a href="https://docs.google.com/document/d/1kRUkLbSwP8A-dIISuf9tAfMZAUFdXQiTqb7y00giUO4/edit?hl=en&authkey=CPSD-PIL">Thoughts</a>
+        </div>
+        <br/><br/>
+        {% block content %}{% endblock %}
+    </body>
+</html>

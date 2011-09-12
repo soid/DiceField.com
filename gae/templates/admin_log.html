@@ -1,0 +1,15 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<table>
+    <tr><td>Admin</td><td width="200">Date<td>User<td>Message<td>Game Cause<td>Last Games
+{% for p in penalies %}
+<tr>
+    <td><a href="{{p.user.getIntLink}}">{{p.admin.nickname}}</a></td>
+    <td>{{p.created|date:"Y-m-d H:i"}}
+    <td><a href="{{p.user.getIntLink}}">{{p.user.nick}}</a>
+    <td>{{p.message}}
+    <td>{% if p.game_id %}<a href="/replay/{{p.game_id}}">{{p.game_id}}</a> (<a href="/replay/{{p.game_id}}?chat_only">chat</a>){% endif %}
+    <td><a href="?action=last_games&user_id={{p.user.key.id}}?chat_only">Last &gt;&gt;&gt;</a>
+{% endfor %}
+</table>
+{% endblock %}

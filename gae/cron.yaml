@@ -1,0 +1,11 @@
+cron:
+- description: today stat to zero
+  url: /cron/midnight
+  schedule: every day 00:00
+  timezone: Europe/Moscow
+
+- description: new season
+  url: /cron/new_season
+  schedule: 1 of month 00:00
+  timezone: Europe/Moscow
+

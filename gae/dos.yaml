@@ -1,0 +1,21 @@
+blacklist:
+#- subnet: 46.73.207.94
+#  description: many request to game.swf
+
+#- subnet: 79.174.33.195
+#  description: many request to game.swf
+
+#- subnet: 78.36.225.46
+#  description: many request to game.swf
+
+#- subnet: 83.149.3.18
+#  description: abuse in chat
+
+#- subnet: 150.70.75.32
+#  description: abuse in chat
+
+#- subnet: 150.70.64.200
+#  description: abuse in chat
+
+#- subnet: 216.104.15.130
+#  description: abuse in chat

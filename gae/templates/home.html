@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>{% load i18n %}
+    <head>
+        <title>
+            {% trans "_home_title" %}
+        </title>
+        <meta name="keywords" content="{% trans "_home_keywords" %}" />
+        <meta name="description" content="{% trans "_home_descr" %}" />
+        <meta name='yandex-verification' content='59ad72c46b3fda68' />
+        <meta name="google-site-verification" content="p3vgTpUe_1uc_Mhr9W9qx3c3kaSDI06MesE8XqyjQEc" />
+
+        <!-- odnoklassinki -->
+        <link href="http://stg.odnoklassniki.ru/share/odkl_share.css" rel="stylesheet">
+        
+        <link href="/css/pages.css" rel="stylesheet" type="text/css" media="all" />
+        <!-- vkontakte.ru like button -->
+        <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?17"></script>
+        <!-- google +1 -->
+        <!-- Place this tag in your head or just before your close body tag -->
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js">{lang: 'ru'}</script>
+
+        <!-- odnoklassinki -->
+        <script src="http://stg.odnoklassniki.ru/share/odkl_share.js" type="text/javascript" ></script>
+
+    </head>
+<body style="color:#5783AF; margin: 0px;" onload="ODKL.init();">
+    <div style="position:relative;text-align:center;">
+        <div style="font-size: 150%;">{% trans "ВКубики.Ру - Войны Кубиков" %}<sup>Б&#949;т&#945;</sup></div>
+    <br/>
+    <div style="font-size: 20">
+        {%ifequal lang "ru"%}
+        Играть: <a href="http://vkontakte.ru/app1955838"><img height="16" width="16" border="0" src="http://vkontakte.ru/images/faviconnew.ico"/>ВКонтакте</a>, в <a href="http://my.mail.ru/apps/553628"><img height="16" width="16" border="0" src="http://img.mail.ru/mail/ru/images/mywap/favicon.ico"/>Моем Мире</a>, на <a href="http://apps.facebook.com/dicefield/"><img height="16" width="16" border="0" src="http://www.facebook.com/favicon.ico"/>Facebook</a>.
+        <br/>
+        <span id="cws" style="display: none;">
+        Доступно в <a href="https://chrome.google.com/webstore/detail/poehkhjlkmahpbimgkdkbecafdgflnmi?hl=ru-RU"><img height="16" width="16" border="0" src="http://www.google.com/images/icons/product/chrome-16.png"/>Chrome Web Store</a> для Google Chrome.
+        <br/></span>
+        Вы играете в гостевом режиме. Чтобы иметь сохраненный рейтинг, играйте в социальных сетях.
+        {% else %}
+
+        {% endifequal %}
+    </div>
+    <iframe src="/guest.html" width="790" height="790" style="border: none;" frameborder="0"></iframe>
+
+</center>
+
+    <!-- social plugins -->
+    {%ifequal lang "ru"%}
+    <div id="likes" style="margin-bottom: 10px; margin-top: 10px;">
+        <!-- vkontakte like it button -->
+        <div style="display: inline-block;":>
+            <script type="text/javascript">VK.init({apiId: {{vk_app_id}}, onlyWidgets: true});</script>
+            <div id="vk_like"></div><script type="text/javascript">VK.Widgets.Like("vk_like", 
+                {
+                    type: "button",
+                    verb: 1,
+                    pageUrl: 'http://vkontakte.ru/app1955838',
+                    pageTitle: 'Кубики (логическая игра с реальными игроками)',
+                    pageDescription: 'Онлайн стратегия с реальными игроками.'
+                });</script>
+        </div>
+        <!-- facebook like it buttin -->
+        <div style="display: inline-block;">
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fapps.facebook.com%2Fvkubiki%2F&amp;layout=button_count&amp;show_faces=true&amp;width=320&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
+        </div>
+        <!-- google +1 -->
+        <!-- Place this tag where you want the +1 button to render -->
+        <g:plusone size="medium" href="www.vkubiki.ru"></g:plusone>
+        <!-- mail.ru like it button -->
+        <div style="display: inline-block;">
+            <a target="_blank" class="mrc__plugin_like_button" href="http://connect.mail.ru/share?share_url=http%3A//my.mail.ru/apps/553628" rel="{'type' : 'button', 'width' : '140'}">Нравится</a>
+            <script src="http://cdn.connect.mail.ru/js/loader.js" type="text/javascript" charset="UTF-8"></script>
+        </div>
+        <!-- tweeter -->
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="www.vkubiki.ru" data-text="Войны кубиков - логическая мини-стратегия, игры с реальными игроками http://www.vkubiki.ru" data-count="horizontal" data-via="Sfoid" data-lang="ru">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+        <!-- odnoklassniki -->
+        <div style="display: inline-block;">
+        <a class="odkl-share-oc" href="http://www.vkubiki.ru" onclick="ODKL.Share(this);return false;" ><span>0</span></a>
+        </div>
+        <!-- yandex share -->
+        <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+        <div class="yashare-auto-init" style="display: inline-block;vertical-align: bottom;" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="yaru,lj,moikrug"></div> 
+    </div>
+    {% else %}
+
+    {% endifequal %}
+    
+    <div style="padding-bottom: 20px; padding-top: 8px; border-top: 1px solid; border-color: #f7dda8; color: black; background: #f2efe9;">
+        
+        <div style="margin-left: 30px; text-align: left; float: left; width: 450px;"><small>
+            {%ifequal lang "ru"%}
+            "Войны Кубиков" - это логическая мини-стратегия, в которой вам нужно играя с другими игроками захватить все территории на карте в небольших партиях
+            <nobr>на 10-15</nobr> минут.
+            Игра основана на игровой механике <a href="http://www.gamedesign.jp/flash/dice/dice.html" target="_blank">Dice Wars</a> японского <nobr>гейм-дизайнера</nobr> <nobr>Таро Ито</nobr>.
+            {% else %}
+            "Dice Field" is a logical strategy multiplayer game where you need to conquer all territories on the map.
+            <br/>
+            Based on <a href="http://www.gamedesign.jp/flash/dice/dice.html" target="_blank">Dice Wars</a> rules.
+            {%endifequal%}
+        </small></div>
+
+        <div style="margin-right: 30px; text-align: right; float: right;">
+            <small>
+                {%trans "Сделано Григорием Темченко"%}<br/>
+                {%trans "в 2&copy;1&copy;-2011 годах."%}<br/>
+                {% trans "Contact e-mail: soid@vkubiki.ru" %}<br/>
+            </small>
+        </div>
+
+        <div style="clear: both;"></div>
+    </div>
+
+    {% include "analytics.html" %}
+    <script>
+        if (navigator.userAgent.search('Chrome')!=-1) {
+            document.getElementById('cws').style.display='block';
+        }
+    </script>
+</div>
+</body>
+</html>

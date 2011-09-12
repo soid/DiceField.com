@@ -1,0 +1,372 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-24 21:22+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: model.py:422
+msgid "Гость "
+msgstr "Guest "
+
+#: model.py:621
+msgid "первый сезон"
+msgstr "the first season"
+
+#: templates/fb_redirect.html:4
+msgid "Пожалуйста, подождите..."
+msgstr "Please, wait..."
+
+#: templates/home.html:5
+msgid "_home_title"
+msgstr "Dice Field - logical multiplayer strategy game"
+
+#: templates/home.html:7
+msgid "_home_keywords"
+msgstr ""
+"game, dice, dice wars, strategy, logic, multiplayer, flash game, casual "
+"game, mini-game, wars of dices, kdice alternative"
+
+#: templates/home.html:8
+msgid "_home_descr"
+msgstr "Causal multiplayer strategy game"
+
+#: templates/home.html:28
+msgid "ВКубики.Ру - Войны Кубиков"
+msgstr "DiceField"
+
+#: templates/home.html:103
+msgid "Сделано Григорием Темченко"
+msgstr "Dice Field"
+
+#: templates/home.html:104
+msgid "в 2&copy;1&copy;-2011 годах."
+msgstr "&copy;2010-2011"
+
+#: templates/home.html:105
+msgid "Contact e-mail: soid@vkubiki.ru"
+msgstr "Contact e-mail: soid@dicefield.com"
+
+#: templates/index.html:4
+msgid "Повтор - "
+msgstr "Replay - "
+
+#: templates/index.html:4
+msgid "Войны Кубиков - ВКубики.Ру"
+msgstr "Dice Field - DiceField.com"
+
+#: templates/index.html:89
+msgid "Повтор игры от"
+msgstr "Replay of the game by"
+
+#: templates/index.html:159 templates/user.html:209
+msgid "Ходы"
+msgstr "Turns"
+
+#: templates/index.html:162
+msgid "Друзья"
+msgstr "Friends"
+
+#: templates/index.html:163
+msgid "Топ"
+msgstr "Leaders"
+
+#: templates/index.html:181
+msgid "Отправить"
+msgstr "Send"
+
+#: templates/index.html:199 templates/index.html.py:227
+#: templates/index.html:234 templates/index.html.py:241
+msgid "Лидеры"
+msgstr "Leaders"
+
+#: templates/index.html:200 templates/index.html.py:228
+#: templates/index.html:235
+msgid "Пригласить друзей"
+msgstr "Invite friends"
+
+#: templates/index.html:201 templates/index.html.py:229
+#: templates/index.html:236 templates/index.html.py:243
+msgid "Помощь"
+msgstr "Help"
+
+#: templates/index.html:255 templates/index.html.py:260
+msgid "Назад"
+msgstr "Back"
+
+#: templates/leaders.html:9 templates/leaders.html.py:12
+#: templates/leaders_old.html:9 templates/leaders_old.html.py:14
+#: templates/leaders_old.html:18
+msgid "Лидеры за "
+msgstr "Leaders on "
+
+#: templates/leaders.html:16
+msgid "Топ 25 за сезон"
+msgstr "Top 25 on the season"
+
+#: templates/leaders.html:32
+msgid "Топ 25 сегодня"
+msgstr "Top 25 Today"
+
+#: templates/leaders.html:48
+msgid "Топ 25 за очков за игру"
+msgstr "Top 25 Points per Game"
+
+#: templates/leaders.html:64
+msgid "Топ 25 за все время"
+msgstr "Top 25 All Time"
+
+#: templates/leaders_old.html:23
+msgid "Топ 25"
+msgstr "Top 25"
+
+#: templates/leaders_old.html:39
+msgid "Топ 25 очков за игру"
+msgstr "Top 25 Points per Game"
+
+#: templates/stat_maps.html:5 templates/user.html:183
+#: templates/user.html.py:210
+msgid "Место"
+msgstr "Place"
+
+#: templates/stat_maps.html:6
+msgid "1<sup>-ое</sup>"
+msgstr "1<sup>st</sup>"
+
+#: templates/stat_maps.html:7
+msgid "2<sup>-ое</sup>"
+msgstr "2<sup>nd</sup>"
+
+#: templates/stat_maps.html:8
+msgid "3<sup>-е</sup>"
+msgstr "3<sup>rd</sup>"
+
+#: templates/stat_maps.html:9
+msgid "4<sup>-ое</sup>"
+msgstr "4<sup>th</sup>"
+
+#: templates/stat_maps.html:10
+msgid "5<sup>-ое</sup>"
+msgstr "5<sup>th</sup>"
+
+#: templates/stat_maps.html:11
+msgid "6<sup>-ое</sup>"
+msgstr "6<sup>th</sup>"
+
+#: templates/stat_maps.html:12
+msgid "7<sup>-ое</sup>"
+msgstr "7<sup>th</sup>"
+
+#: templates/stat_maps.html:13
+msgid "8<sup>-ое</sup>"
+msgstr "8<sup>th</sup>"
+
+#: templates/stat_maps.html:16
+msgid "Размер карты"
+msgstr "Map Size"
+
+#: templates/stat_maps.html:20
+msgid "4 человека"
+msgstr "4 persons"
+
+#: templates/stat_maps.html:29
+msgid "6 человек"
+msgstr "6 persons"
+
+#: templates/stat_maps.html:39
+msgid "8 человек"
+msgstr "8 persons"
+
+#: templates/user.html:4
+msgid " - ВКубики.ру"
+msgstr " - DiceField.com"
+
+#: templates/user.html:51
+msgid "Откуда"
+msgstr "Location"
+
+#: templates/user.html:56
+msgid "Пол"
+msgstr "Sex"
+
+#: templates/user.html:56
+msgid "мужской"
+msgstr "male"
+
+#: templates/user.html:56
+msgid "женский"
+msgstr "female"
+
+#: templates/user.html:58
+msgid "Возраст"
+msgstr "Age"
+
+#: templates/user.html:113
+msgid "Статистика за "
+msgstr "Performance on "
+
+#: templates/user.html:118
+msgid " место в общем рейтинге."
+msgstr " place in rating table."
+
+#: templates/user.html:123 templates/user.html.py:212
+msgid "Рейтинг"
+msgstr "Points"
+
+#: templates/user.html:125
+msgid "Игр сыграно"
+msgstr "Games played"
+
+#: templates/user.html:129
+msgid "Сегодня очков"
+msgstr "Points today"
+
+#: templates/user.html:131
+msgid "Очков за игру в среднем"
+msgstr "Points per game"
+
+#: templates/user.html:136
+msgid "Убийств"
+msgstr "Kills"
+
+#: templates/user.html:138
+msgid "Доминация"
+msgstr "Domination"
+
+#: templates/user.html:141
+msgid "Удача"
+msgstr "Luck"
+
+#: templates/user.html:143
+msgid "Атакующий"
+msgstr "Attacker"
+
+#: templates/user.html:155
+msgid "Награды"
+msgstr "Rewards"
+
+#: templates/user.html:159
+msgid "Первое место за "
+msgstr "First place on "
+
+#: templates/user.html:162
+msgid "Второе место за "
+msgstr "Second place on "
+
+#: templates/user.html:165
+msgid "Третье место за "
+msgstr "Third place on "
+
+#: templates/user.html:168
+msgid " место за "
+msgstr " place on "
+
+#: templates/user.html:178
+msgid "Статистика по предыдущим сезонам"
+msgstr "Performance on previous seasons"
+
+#: templates/user.html:182
+msgid "Сезон"
+msgstr "Season"
+
+#: templates/user.html:184 templates/user.html.py:211 templates/user.html:243
+msgid "Очки"
+msgstr "Points"
+
+#: templates/user.html:185
+msgid "Очков за игру"
+msgstr "Points per game"
+
+#: templates/user.html:186
+msgid "Игр"
+msgstr "Games"
+
+#: templates/user.html:200
+msgid "Последние игры"
+msgstr "Last Played Games"
+
+#: templates/user.html:204
+msgid "Пользователь еще не сыграл ни одной партии."
+msgstr "The user has not played yet."
+
+#: templates/user.html:207 templates/user.html.py:230
+msgid "Дата"
+msgstr "Date"
+
+#: templates/user.html:208
+msgid "Карта"
+msgstr "Map"
+
+#: templates/user.html:213 templates/user.html.py:263
+msgid "Повтор"
+msgstr "Replay"
+
+#: templates/user.html:221
+msgid "Еще"
+msgstr "More"
+
+#: templates/user.html:225
+msgid "Штрафы"
+msgstr "Penalties"
+
+#: templates/user.html:231
+msgid "Модератор"
+msgstr "Moderator"
+
+#: templates/user.html:246
+msgid "Запрещено писать в чат."
+msgstr "Chat banned"
+
+#: templates/user.html:249
+msgid "Запрещено играть с"
+msgstr "Prohibited playing together with"
+
+#: templates/user.html:254
+msgid "Длительность"
+msgstr "Duration"
+
+#: templates/user.html:256
+msgid "Запрет не действителен."
+msgstr "Panalty expired."
+
+#: templates/user.html:258
+msgid "Запрет действителен еще "
+msgstr "Penalty will expire in "
+
+#: templates/user.html:263
+msgid "посмотреть"
+msgstr "play"
+
+#: templates/user.html:268
+msgid "Комментарий"
+msgstr "Reason"
+
+#: templates/user.html:275
+msgid ""
+"Если вы считаете, что вас оштрафовали ошибочно, вы можете обжаловать свой "
+"штраф написав e-mail по адресу soid@vkubiki.ru."
+msgstr "soid@dicefield.com"
+
+#: templates/user_stats.html:5
+msgid "Штраф"
+msgstr "Penalty"
+
+#: templates/user_stats.html:13
+msgid "Бонус"
+msgstr "Bonus"
+
+#: templates/user_stats.html:26
+msgid "Смотреть"
+msgstr "Play"

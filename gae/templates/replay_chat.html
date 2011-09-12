@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <script>
+            var replay = {{record|safe}};
+        </script>
+    </head>
+    <body>
+        <script>
+            for (var m in replay) {
+                if (replay[m][0] == 'Chat') {
+                    var msg = replay[m];
+                    document.write('<a href="/user/' + msg[1][0] + '">' + msg[1][1] + '</a>: ' + msg[1][3] + '<br/>');
+                }
+            }
+        </script>
+    </body>
+</html>

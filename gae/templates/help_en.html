@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>DiceField.com - Help</title>
+    </head>
+    <body>
+        {% ifequal type "mm" %}
+        <div>
+        {% else %}
+        <center>
+        <div style="width: 600px; text-align: left;">
+        {% endifequal %}
+            <div style="color:#7895AF;font-size: 125%;">Help</div>
+            <div>
+                For first you have to choose a map you want to play on. You can click "Find free map" to find any available for playing map or click "List of Maps" to see all available maps. Then choose color of territories you want to play. To get start you have to wait 4-8 people on your map.
+            </div>
+            <br/>
+            <div style="color:#7895AF;font-size: 125%;">Rules</div>
+            <ul>
+<li>The goal is to conquer every territory on the map;</li>
+<li>At the end of the every turn you receive bonus dices on your territories;</li>
+<li>As many united territories you have, as many bonus dices you receive;</li>
+<li>The number of bonus dices is a greatest number of your united territories.</li>
+            </ul>
+    <div style="color:#7895AF;font-size: 125%;">Options</div>
+    <ul>
+<li>You may turn off the sound by clicking a sound icon in the right top corner;</li>
+        </ul>
+    <div style="color:#7895AF;font-size: 125%;">Policies</div>
+    <ul>
+        <li>Do not harrass people</li>
+        <li>Do not deal alliances or truces outside of the game chat;</li>
+        <li>Do not deal game-to-game alliances</li>
+    </ul>
+    </div>
+    {% ifequal type "mm" %}
+    </center>
+    {% endifequal %}
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>{% load i18n %}
+    <head>
+        <title>{{user.nickFull}}{% trans " - ВКубики.ру" %}</title>
+        <link href="/css/pages.css" rel="stylesheet" type="text/css" media="all" />        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+        <script src="/js/lang.{{lang}}.js"></script>
+        <script>
+            {% if cursor %}
+            var cursor = '{{ cursor }}';
+            function loadLastGames() {
+                $('#lg_ajax_loading').show();
+                $.ajax({
+                    async: true,
+                    cache: false,
+                    url: 'http://{{gserver}}/rating/last-games.json',
+                    type: 'GET',
+                    data: {'cursor': cursor, 'user_id': '{{ user.key.id }}'},
+                    dataType: 'json',
+                    success: function (data) {
+                        $('#last_row_last_games').before(data['add']);
+                        if (data['cursor']) {
+                            cursor = data['cursor'];
+                        } else {
+                            $('#last_game_more').hide();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    },
+                    complete: function() {
+                        $('#lg_ajax_loading').hide();
+                    }
+                });
+            }
+            {% endif %}
+        </script>
+    </head>
+    <body style="text-align: center;">
+        <div align="center" style="text-align: left;display: inline-block; width: 600px;">
+            <img height="50" width="50" src="{{user.photo}}" />
+            <font style="font-family: cursive;font-size:38px;"><script>
+                    document.write(lang.romanize("{{user.nickFull}}"));
+            </script></font>
+            {% if user.title %}
+            <br/><font color="#45688E" style="font-size: small;">{{ user.title }}</font>
+            {% endif %}
+        </div>
+        <br/>
+        <div style="text-align: right;display: inline-block; width: 600px;">
+            <div style="float: left; text-align:left;">
+                {% if user.location %}{% trans "Откуда" %}: <script>
+                    document.write(lang.romanize("{{user.location}}"));
+                </script>,{% endif %}
+                {% if user.country %}<script>document.write(lang.country['{{user.country}}']+' ');</script><img border="0" width="" height="" src="/images/flags_s/{{ user.country }}.png"/>{% endif %}
+                <br/>
+                {% if user.sex %}{% trans "Пол" %}: {% ifequal user.sex "male" %}{% trans "мужской" %}{% else %}{% trans "женский" %}{% endifequal %}{%endif%}
+                <br/>
+                {% if user.age %}{% trans "Возраст" %}: {{ user.age }}{% endif %}
+            </div>
+            <div>
+                {% ifnotequal me.auth_type "mm" %}<a target="_blank" href="{{user.link}}">{% endifnotequal %}{% ifequal user_type "vk" %}<img alt="Страница пользователя ВКонтакте" title="Пользователь ВКонтакте" border="0" height="50" width="50" src="/images/vkontakte50x50.png" style="vertical-align: top;"/>{% endifequal %}{% ifequal user_type "mm" %}<img alt="Страница пользователя в Моем Мире" title="Пользователь в Моем Мире" border="0" height="50" width="50" src="/images/mm50x50.png" style="vertical-align: top;"/>{% endifequal %}{% ifequal user_type "fb" %}<img alt="Страница пользователя на Facebook" title="Пользователь на Facebook" border="0" height="50" width="50" src="/images/fb50x50.png" style="vertical-align: top;"/>{% endifequal %}{% ifnotequal me.auth_type "mm" %}</a>{% endifnotequal %}
+            </div>
+            {% if me.admin_rights %}
+            <script>
+                function showPeriodSelect(id) {
+                    var tmp = '<select onChange="document.getElementById(\'' + id + '\').value=this.value;">'
+                        + '<option value="60">1 hour</option>'
+                        + '<option value="180">3 hours</option>'
+                        + '<option value="360">6 hours</option>'
+                        + '<option value="720">12 hours</option>'
+                        + '<option value="1440">1 day</option>'
+                        + '<option value="2880">2 days</option>'
+                        + '<option value="4320">3 days</option>'
+                        + '<option value="7200">5 days</option>'
+                        + '<option value="10080">7 days</option>'
+                        + '<option value="20160">14 days</option>'            
+                        + '<option value="43200">30 days</option>'
+                        + '</select>'
+                    document.write(tmp);
+                }
+            </script>
+            <a href="#" onClick="jQuery('#admin_panel').slideToggle(); return false"><img src="/images/law.jpg" hight="50" width="50" border=0/></a>
+            <a name="moder"></a>
+            <div id="admin_panel" style="display: none;">
+                {% if user.last_ip %}
+                Последний IP: {{user.last_ip}} (<a href="http://whois.domaintools.com/{{user.last_ip}}">whois</a>)<br/>
+                {% endif %}
+                <a href="/admin.html?action=last_games&user_id={{user.key.id}}">Последние игры</a><br/>
+                <form method="POST" action="/admin.html">
+                    <input type="hidden" name="action" id="penalty_action" value="penalty"/>
+                    <input type="hidden" name="penalty_id" id="penalty_id" value=""/>
+                    <input type="hidden" name="user_id" value="{{ user.key.id }}" />
+                    <font color="red"><label id="penalty_label">Наложить</label> штраф на пользователя {{user.key.id}}:</font><br/>
+                    {% if me.getAdminRightBanScore %}
+                    Очки: -<input type="text" name="score" id="ban_score" value=""/><br/>
+                    {% endif %}
+                    {% if me.getAdminRightBanPlayTogether %}
+                    Запретить играть с (id пользователя): <input type="text" id="play_with" name="user_with" /><br/>
+                    {% endif %}
+                    {% if me.getAdminRightBanChat %}
+                    <input type="checkbox" name="chat_ban" id="chat_ban_id"> <label for="chat_ban_id">Запретить писать в чат</label><br/>
+                    {% endif %}
+                    Длительность (мин): <input type="text" id="id1" name="period" value="60"/>
+                    <script>showPeriodSelect('id1');</script><br/>
+                    Комментарий: <input type="text" name="message" id="ban_comment" style="width: 300px;" /><br/>
+                    Id игры: <input type="text" name="game_id" id="ban_game_id" /><br/>
+                    <input type="submit" id="subm_ban" value="Наложить штраф"/>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        <br/>
+        <div class="section">{% trans "Статистика за " %}{{cur_season|capfirst}}</div>
+        <br/>
+        <table align="center" width="600px">
+            <tr><td align="left" colspan="2">
+                {% if user.getPlace %}
+                {{user.getPlace|num_suffix_sup}}{% trans " место в общем рейтинге." %}
+                {% endif %}
+            </td></tr>
+
+            <tr><td align="left">
+                    {% trans "Рейтинг" %}: {%ifequal lang "ru" %}{{user.score|plural_num:"очко,очка,очков"}}{%else%}{{user.score}}{%endifequal%}
+            </td><td align="right">
+                {% trans "Игр сыграно" %}: {{user.stat_games}}
+            </td></tr>
+
+            <tr><td align="left">
+                {% trans "Сегодня очков" %}: {{user.stat_score_today|score}}
+            </td><td align="right">
+                {% trans "Очков за игру в среднем" %}: {{user.ppg|floatformat}}
+            </td></tr>
+        
+            {% if me.admin_rights %}
+            <tr><td align="left">
+                {% trans "Убийств" %}: {{user.stat_kills}}
+            </td><td align="right">
+                {% trans "Доминация" %}: {{user.stat_domination|floatformat:2}}%
+            </td></tr>
+            <tr><td align="left">
+                {% trans "Удача"%}: {{user.stat_luck|floatformat:2}}%
+            </td><td align="right">
+                {% trans "Атакующий"%}: {{user.stat_attacks|floatformat:2}}%
+            </td></tr>
+            {% endif %}
+
+            <tr><td align="left">
+                <!-- Убийств: {{user.stat_kills}} -->
+            </td><td align="right">
+            </td></tr>
+        </table>
+        {% include "stat_maps.html" %}
+        {% if is_reward %}
+        <br/>
+        <div class="section">{% trans "Награды" %}</div>
+        <br/>
+        {% for s in stat_season %}
+            {% ifequal s.place 1%}
+            <img width="50" src="/images/rewards/medal1.png" alt="{% trans "Первое место за " %}{{s.getSeasonName}}" title="{% trans "Первое место за " %}{{s.getSeasonName}}" />
+            {% else %}
+            {% ifequal s.place 2%}
+            <img width="50" src="/images/rewards/medal2.png" alt="{% trans "Второе место за " %}{{s.getSeasonName}}" title="{% trans "Второе место за " %}{{s.getSeasonName}}" />
+            {% else %}
+            {% ifequal s.place 3%}
+            <img width="50" src="/images/rewards/medal3.png" alt="{% trans "Третье место за " %}{{s.getSeasonName}}" title="{% trans "Третье место за " %}{{s.getSeasonName}}" />
+            {% else %}
+            {% if s.isRewarded %}
+            <img width="50" src="/images/rewards/medal_x.png" alt="{{s.place|num_suffix}}{% trans " место за " %}{{s.getSeasonName}}" title="{{s.place}}{% trans " место за " %}{{s.getSeasonName}}" />
+            {% endif %}
+            {% endifequal %}
+            {% endifequal %}
+            {% endifequal %}
+        {% endfor %}
+        {% endif %}
+        <br/>
+        <br/>
+        {% if is_stat_season %}
+        <div class="section">{% trans "Статистика по предыдущим сезонам" %}</div>
+        <br/>
+        <table align="center" width="600px">
+            <tr>
+                <th>{% trans "Сезон" %}</th>
+                <th>{% trans "Место" %}</th>
+                <th>{% trans "Очки" %}</th>
+                <th>{% trans "Очков за игру" %}</th>
+                <th>{% trans "Игр" %}</th>
+            </tr>
+        {% for s in stat_season %}
+                <tr>
+                    <td><a href="{{s.getLink}}">{{s.getSeasonName|capfirst}}</a></td>
+                    <td>{% if s.place %}{{s.place}}{% else %}-{% endif %}</td>
+                    <td>{{s.score}}</td>
+                    <td>{{s.stat_ppg|floatformat:2}}</td>
+                    <td>{{s.stat_games}}</td>
+                </tr>
+        {% endfor %}
+            </table>
+        <br/>
+        {% endif %}
+        <div class="section">{% trans "Последние игры" %}</div>
+        <br/>
+        <table align="center" width="600px">
+            {% if games_empty %}
+            <tr><td><center><i>{% trans "Пользователь еще не сыграл ни одной партии." %}</i></center></td></tr>
+            {% else %}
+            <tr>
+                <th>{% trans "Дата" %}</th>
+                <th>{% trans "Карта" %}</th>
+                <th>{% trans "Ходы" %}</th>
+                <th>{% trans "Место" %}</th>
+                <th>{% trans "Очки" %}</th>
+                <th>{% trans "Рейтинг" %}</th>
+                <th>{% trans "Повтор" %}</th>
+            </tr>
+            {% include "user_stats.html" %}
+            {% endif %}
+            <tr id="last_row_last_games"></tr>
+        </table>
+        {% if cursor %}
+        <img id="lg_ajax_loading" src="/images/ajax-loader.gif" height="16" width="16" style="display: none;"/>
+        <a href="#" onClick="loadLastGames(); return false;" id="last_game_more">{% trans "Еще" %}</a>
+        {% endif %}
+        <br/>
+        {% if penalties %}
+        <div class="section_red">{% trans "Штрафы" %}</div>
+        <br/>
+        <table align="center" width="600px">
+            {% for p in penalties %}
+            <tr align="left">
+                <td valign="top">{% trans "Дата" %}: {{p.created|date:"DATE_FORMAT"}}</td>
+                <td align="right">{% trans "Модератор" %}: <a href="/user/{{p.admin.key.id}}"><script>
+                        document.write(lang.romanize("{{p.admin.nickname}}"));
+                    </script></a>
+                    {% if me.admin_rights %}{% if p.isNotExpired %}
+                    <br/><a href="#moder" onClick='jQuery("#admin_panel").slideDown();fillEditBan({{p.key.id|jsonify}}, {{p.penalty_score|jsonify}}, {{p.penalty_playing_together.key.id|jsonify}}, {{p.ban_chat|jsonify}}, {{p.message|jsonify}}, {{ p.game_id|jsonify }}, {{ p.duration_min|jsonify }});'>[~] Изменить</a>
+                    <!-- | <a href="">[X] Удалить</a> -->
+                    {% endif %}{% endif %}
+                </td>
+            </tr>
+            <tr align="left">
+                <td colspan="2">
+                    {% if p.penalty_score %}
+                        {% trans "Очки" %}: -{{ p.penalty_score }}<br/>
+                    {% endif %}
+                    {% if p.ban_chat %}
+                        {% trans "Запрещено писать в чат." %}<br/>
+                    {% endif %}
+                    {% if p.penalty_playing_together %}
+                        {% trans "Запрещено играть с" %}: <a href="/user/{{p.penalty_playing_together.key.id}}"><script>
+                            document.write(lang.romanize("{{p.penalty_playing_together.nickFull}}"));
+                        </script></a><br/>
+                    {% endif %}
+                    {% if p.hasExpiration %}
+                    {% trans "Длительность" %}: {{p.created|timesince:p.expired}}.
+                    {% if p.isExpired %}
+                        {% trans "Запрет не действителен." %}
+                    {% else %}
+                        {% trans "Запрет действителен еще " %}{{ p.expired|timeuntil }}.
+                    {% endif %}
+                    <br/>
+                    {% endif %}
+                    {% if p.game_id %}
+                        {% trans "Повтор" %}: <a target="_blank" href="/replay/{{ p.game_id }}">{% trans "посмотреть" %}</a>.<br/>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr align="left">
+                <td colspan="2">{% trans "Комментарий" %}: <i>{{p.message}}</i></td>
+            </tr>
+            <tr><td><br/></td></tr>
+            {% endfor %}
+            <tr><td colspan="2">
+                {% ifequal me.key user.key %}
+                <i>
+                    {% trans "Если вы считаете, что вас оштрафовали ошибочно, вы можете обжаловать свой штраф написав e-mail по адресу soid@vkubiki.ru." %}
+                </i>
+                {% endifequal %}
+            </td></tr>
+        </table>
+        {% endif %}
+        {% if me.admin_rights %}
+        <script>
+        function fillEditBan(id, score, play_with, ban_chat, msg, game, dur) {
+            document.getElementById('ban_score').value = score;
+            document.getElementById('play_with').value = play_with;
+            document.getElementById('play_with').disabled = true;
+            document.getElementById('chat_ban_id').checked = ban_chat;
+            document.getElementById('chat_ban_id').disabled = true;
+            document.getElementById('ban_comment').value = msg;
+            document.getElementById('ban_game_id').value = game;
+            document.getElementById('id1').value = dur;
+            document.getElementById('penalty_id').value = id;
+            document.getElementById('subm_ban').value = 'Изменить штраф';
+            document.getElementById('penalty_label').innerHTML = 'Изменить';
+        }
+        </script>
+        {% endif %}
+
+        {% include "analytics.html" %}
+    </body>
+</html>

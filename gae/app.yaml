@@ -1,0 +1,81 @@
+application: go-dice
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: static\/robots\.txt
+
+- url: /receiver.html
+  static_files: static/receiver.html
+  upload: static\/receiver\.html
+
+- url: /favicon.ico
+  static_files: static/favicon.ico
+  upload: static\/favicon\.ico
+  expiration: "7d"
+
+- url: /xd_receiver.html
+  static_files: static/xd_receiver.html
+  upload: static\/xd_receiver\.html
+  expiration: "7d"
+
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+
+- url: /_ah/queue/deferred
+  script: $PYTHON_LIB/google/appengine/ext/deferred/handler.py
+  login: admin
+
+- url: /remote_api  
+  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py  
+  login: admin 
+
+- url: /css
+  static_dir: static/css
+
+- url: /sounds
+  static_dir: static/sounds
+  expiration: "8h"
+
+- url: /swf/game.swf
+  script: swf.py
+
+- url: /swf
+  static_dir: static/swf
+
+- url: /images
+  static_dir: static/images
+  expiration: "8h"
+
+- url: /maps
+  static_dir: static/maps
+
+- url: /js
+  static_dir: static/js
+  
+#- url: /update
+#  script: update.py
+
+- url: /cron/.*
+  script: cron.py
+  login: admin
+
+- url: /facebook\.html
+  script: controller.py
+  secure: optional
+
+- url: (.*)
+  script: controller.py
+
+
+error_handlers:
+  - error_code: timeout
+    file: templates/error_timeout.html
+
+builtins:
+
+- datastore_admin: on

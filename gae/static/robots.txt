@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /replay/
+Disallow: /user/
+Disallow: /leaders/
+Disallow: /leaders.html
+Host: www.vkubiki.ru
